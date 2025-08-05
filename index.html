@@ -6,46 +6,63 @@
   <title>Happy Birthday Rakhim</title>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      overflow: hidden;
-      font-family: 'Pacifico', cursive;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(-45deg, #ff6ec4, #7873f5, #4adede, #f8ffae);
-      background-size: 400% 400%;
-      animation: gradientBG 12s ease infinite;
-    }
+    body {margin:0;padding:0;height:100vh;overflow:hidden;font-family:'Pacifico',cursive;
+      display:flex;justify-content:center;align-items:center;
+      background:linear-gradient(-45deg,#ff6ec4,#7873f5,#4adede,#f8ffae);
+      background-size:400% 400%;animation:gradientBG 12s ease infinite;}
     @keyframes gradientBG {0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
     .gift-container{text-align:center;cursor:pointer;animation:fadeIn 1.5s ease;}
-    .gift{font-size:6em;animation:bounce 2s infinite;}
+    .gift{font-size:6em;animation:bounce 2s infinite, giftGlow 2s ease-in-out infinite alternate;}
     .open-text{margin-top:15px;font-size:1.5em;color:white;animation:fadeInUp 2s ease;}
-    @keyframes fadeIn {from{opacity:0;}to{opacity:1;}}
-    @keyframes fadeInUp {from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-    @keyframes bounce {0%,100%{transform:translateY(0);}50%{transform:translateY(-20px);}}
+    @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-20px);}}
+    @keyframes giftGlow {
+      from { text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4, 0 0 30px #ff1493; }
+      to { text-shadow: 0 0 20px #ff1493, 0 0 40px #ff69b4, 0 0 50px #ff1493; }
+    }
     .gift.pop{animation:popAnim 0.7s ease forwards;}
-    @keyframes popAnim {0%{transform:scale(1) rotate(0deg);}30%{transform:scale(1.2) rotate(5deg);}60%{transform:scale(0.8) rotate(-5deg);}100%{transform:scale(0) rotate(360deg);opacity:0;}}
+    @keyframes popAnim{0%{transform:scale(1) rotate(0deg);}30%{transform:scale(1.2) rotate(5deg);}60%{transform:scale(0.8) rotate(-5deg);}100%{transform:scale(0) rotate(360deg);opacity:0;}}
     .hidden{display:none;}
     .message{text-align:center;color:#fff;animation:fadeIn 2s ease;}
-    h1{font-size:3em;background:linear-gradient(90deg,gold,#ffdf00,#f5f5f5);-webkit-background-clip:text;color:transparent;text-shadow:0 0 20px rgba(255,215,0,0.6);animation:dropBounce 1s ease forwards;}
-    @keyframes dropBounce {0%{opacity:0;transform:translateY(-100px);}60%{opacity:1;transform:translateY(30px);}80%{transform:translateY(-10px);}100%{transform:translateY(0);}}
-    .nickname{font-size:2em;font-weight:bold;position:relative;background:linear-gradient(90deg,#ff0057,#ff7c00,#ffe600,#4aff00,#00ffe5,#7000ff);background-size:400%;-webkit-background-clip:text;color:transparent;animation:rainbow 3s linear infinite;text-shadow:0 0 15px rgba(255,255,255,0.3);}
-    @keyframes rainbow {0%{background-position:0%;}100%{background-position:400%;}}
+    h1{font-size:3em;background:linear-gradient(90deg,gold,#ffdf00,#f5f5f5);-webkit-background-clip:text;
+      color:transparent;text-shadow:0 0 20px rgba(255,215,0,0.6);animation:dropBounce 1s ease forwards;}
+    @keyframes dropBounce{0%{opacity:0;transform:translateY(-100px);}60%{opacity:1;transform:translateY(30px);}80%{transform:translateY(-10px);}100%{transform:translateY(0);}}
+    .nickname{font-size:2em;font-weight:bold;position:relative;background:linear-gradient(90deg,#ff0057,#ff7c00,#ffe600,#4aff00,#00ffe5,#7000ff);
+      background-size:400%;-webkit-background-clip:text;color:transparent;animation:rainbow 3s linear infinite;text-shadow:0 0 15px rgba(255,255,255,0.3);}
+    @keyframes rainbow{0%{background-position:0%;}100%{background-position:400%;}}
     .nickname::after{content:"✨";position:absolute;right:-20px;animation:sparkle 1.2s infinite;}
-    @keyframes sparkle {0%{opacity:0;transform:scale(0.5) rotate(0);}50%{opacity:1;transform:scale(1.3) rotate(180deg);}100%{opacity:0;transform:scale(0.5) rotate(360deg);}}
+    @keyframes sparkle{0%{opacity:0;transform:scale(0.5) rotate(0);}50%{opacity:1;transform:scale(1.3) rotate(180deg);}100%{opacity:0;transform:scale(0.5) rotate(360deg);}}
     .fromclass{font-size:1.4em;margin-top:10px;color:#ffe4b5;animation:fadeInUp 2s ease-out;}
     .quote{margin-top:20px;font-size:1.2em;color:#fffbe7;font-style:italic;animation:fadeInUp 2.5s ease;}
-    button{margin-top:30px;background:#ff4081;border:none;color:white;font-size:1.2em;padding:12px 24px;border-radius:50px;cursor:pointer;box-shadow:0 0 20px rgba(255,64,129,0.6);transition:transform 0.3s ease,box-shadow 0.3s ease;animation:fadeInUp 2.5s ease-out;}
+    .btns{margin-top:30px;display:flex;flex-direction:column;align-items:center;gap:15px;}
+    button{background:#ff4081;border:none;color:white;font-size:1.2em;padding:12px 24px;border-radius:50px;cursor:pointer;
+      box-shadow:0 0 20px rgba(255,64,129,0.6);transition:transform 0.3s ease,box-shadow 0.3s ease;animation:fadeInUp 2.5s ease-out;}
     button:hover{transform:scale(1.1) rotate(2deg);box-shadow:0 0 30px rgba(255,64,129,1);}
+    .share-icons{display:flex;gap:15px;justify-content:center;margin-top:10px;}
+    .share-icons a{width:40px;height:40px;display:flex;justify-content:center;align-items:center;border-radius:50%;background:white;
+      box-shadow:0 0 10px rgba(0,0,0,0.2);transition:transform 0.3s;}
+    .share-icons a:hover{transform:scale(1.2);}
+    .share-icons svg{width:20px;height:20px;}
     canvas,.balloon{position:fixed;top:0;left:0;pointer-events:none;}
-    .balloon{width:60px;height:80px;position:absolute;border-radius:50% 50% 50% 50%;animation:float 8s ease-in-out infinite;opacity:0.8;}
-    @keyframes float {0%{transform:translateY(100vh) rotate(0deg);}50%{transform:translateY(40vh) rotate(5deg);}100%{transform:translateY(-20vh) rotate(-5deg);}}
+    .balloon{width:60px;height:80px;position:absolute;border-radius:50% 50% 50% 50%;
+      animation:float 8s ease-in-out infinite, balloonGlow 2s ease-in-out infinite alternate;opacity:0.9;}
+    @keyframes balloonGlow {
+      from { box-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 20px rgba(255, 255, 255, 0.2); }
+      to { box-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.3); }
+    }
+    @keyframes float{0%{transform:translateY(100vh) rotate(0deg);}50%{transform:translateY(40vh) rotate(5deg);}100%{transform:translateY(-20vh) rotate(-5deg);}}
+    #stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+    .footer-glow {position:fixed; bottom:10px; width:100%; text-align:center; font-size:1em; font-family:Arial, sans-serif; color:#fffbe7; animation:glowFooter 2s ease-in-out infinite alternate;}
+    .footer-glow a {color:#ffb3ec; text-decoration:none; font-weight:bold; animation:linkGlow 2s ease-in-out infinite alternate;}
+    @keyframes glowFooter {from{text-shadow:0 0 5px #ff69b4,0 0 10px #ff69b4;}to{text-shadow:0 0 15px #ff1493,0 0 30px #ff69b4;}}
+    @keyframes linkGlow {from{text-shadow:0 0 5px #ffb3ec;}to{text-shadow:0 0 15px #ff66cc,0 0 30px #ffb3ec;}}
   </style>
 </head>
 <body>
+  <!-- Stars -->
+  <canvas id="stars"></canvas>
+
   <!-- Gift screen -->
   <div id="gift" class="gift-container">
     <div class="gift" id="giftIcon">🎁</div>
@@ -58,7 +75,27 @@
     <div class="nickname">AKA Rakhim</div>
     <div class="fromclass">From Form 3 East</div>
     <div class="quote" id="quote"></div>
-    <button onclick="alert('From Cytra with ❤️')">From Cytra with ❤️</button>
+    <div class="btns">
+      <button onclick="alert('From Cytra with ❤️')">From Cytra with ❤️</button>
+      <div class="share-icons">
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/" target="_blank" title="Share on Instagram">
+          <svg fill="#E1306C" viewBox="0 0 448 512"><path d="M224,202.66A53.34,53.34,0,1,0,277.34,256,53.38,53.38,0,0,0,224,202.66Zm124.71-41a54,54,0,0,0-30.38-30.38C296.37,124,224,124,224,124s-72.37,0-94.33,7.28a54,54,0,0,0-30.38,30.38C92,146.63,92,224,92,224s0,77.37,7.28,99.33a54,54,0,0,0,30.38,30.38C151.63,356,224,356,224,356s72.37,0,94.33-7.28a54,54,0,0,0,30.38-30.38C356,301.37,356,224,356,224S356,146.63,348.71,161.66ZM224,338a114,114,0,1,1,114-114A114,114,0,0,1,224,338Zm146-194a26,26,0,1,1-26-26A26,26,0,0,1,370,144Z"/></svg>
+        </a>
+        <!-- WhatsApp -->
+        <a href="https://wa.me/?text=Check%20this%20Birthday%20Gift!%20" target="_blank" title="Share on WhatsApp">
+          <svg fill="#25D366" viewBox="0 0 448 512"><path d="M380.9 97.1C339-44.2 193.2-18.7 98.5 21.5 41.6 46.4 9.3 103.3 3.2 164.8c-6 64.1 13 127.7 52.8 175.7l-15 82.8c-2.8 15.4 10.6 28.1 25.9 25.2l83.2-15c51.5 34.2 114.7 50.3 178.3 39.4 62.5-10.5 117.5-46.7 153.6-98.5 47-70.5 51.4-163.2 9.9-237.3zM224 438.2c-40.9 0-80.7-11.8-114.5-34.2l-7.3-4.8-49.5 8.9 9.5-49-4.9-7.6C29 320.5 13 273.7 18.4 226.8 24.7 177.6 50.5 134.6 89.1 106c72.5-52.3 174.3-41.2 231.5 26 48.3 56.4 54.7 137.6 15.1 199.4-30.3 46.6-82.6 72.8-136.6 72.8z"/></svg>
+        </a>
+        <!-- Twitter -->
+        <a href="https://twitter.com/intent/tweet?text=Check%20this%20Birthday%20Gift!" target="_blank" title="Share on Twitter">
+          <svg fill="#1DA1F2" viewBox="0 0 512 512"><path d="M459.4 151.7c.3 4.5.3 9 .3 13.5 0 137.5-104.7 296-296 296-58.7 0-113.3-17-159.4-46.4 8.4 1 16.8 1.5 25.3 1.5 48.8 0 93.7-16.5 129.3-44.8-45.7-.8-84.2-31-97.4-72.4 6.4 1 12.9 1.5 19.4 1.5 9.4 0 18.6-1.2 27.2-3.7-47.8-9.6-83.7-51.7-83.7-102.1v-1.3c14 7.8 30.1 12.6 47.2 13.1-28.1-18.7-46.6-50.7-46.6-86.6 0-19.1 5.2-36.8 14.3-52.1 51.9 63.7 129.3 105.3 216.7 109.7-1.8-7.6-2.8-15.5-2.8-23.7 0-57.5 46.6-104.1 104.1-104.1 29.9 0 56.9 12.6 75.9 33 23.7-4.5 45.7-13.4 65.5-25.3-7.8 24.2-24.2 44.5-45.7 57.3 21.1-2.4 41.6-8.1 60.3-16.2-14 21-31.5 39.5-51.7 54.3z"/></svg>
+        </a>
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/sharer/sharer.php?u=" target="_blank" title="Share on Facebook">
+          <svg fill="#4267B2" viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91V131.78c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S293.09 0 264.32 0c-73.11 0-121.09 44.38-121.09 124.72V195.3H86.41V288h56.82v224h92.66V288z"/></svg>
+        </a>
+      </div>
+    </div>
   </div>
 
   <!-- Confetti canvas -->
@@ -71,81 +108,109 @@
 
   <!-- Birthday song & click sound -->
   <audio id="hbdSong">
-    <source src="HappyBirthdayRemix.m4a" type="audio/mp4">
+    <source src="Happy Birthday (Remix).m4a" type="audio/mp4">
     <source src="HappyBirthdayRemix.mp3" type="audio/mpeg">
   </audio>
   <audio id="clickSound">
     <source src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg" type="audio/ogg">
   </audio>
 
-  <script>
-    const gift = document.getElementById('gift');
-    const giftIcon = document.getElementById('giftIcon');
-    const message = document.getElementById('message');
-    const confettiCanvas = document.getElementById('confetti');
-    const balloons = [document.getElementById('balloon1'), document.getElementById('balloon2'), document.getElementById('balloon3')];
-    const song = document.getElementById('hbdSong');
-    const clickSound = document.getElementById('clickSound');
-    const quoteEl = document.getElementById('quote');
-    const ctx = confettiCanvas.getContext('2d');
-    confettiCanvas.width = window.innerWidth;
-    confettiCanvas.height = window.innerHeight;
+  <!-- Footer -->
+  <footer class="footer-glow">
+    🎂 Crafted with ❤️ by <a href="https://waikwa.vercel.app" target="_blank">Cytra</a>
+  </footer>
 
-    const quotes = [
+  <script>
+    const gift=document.getElementById('gift');
+    const giftIcon=document.getElementById('giftIcon');
+    const message=document.getElementById('message');
+    const confettiCanvas=document.getElementById('confetti');
+    const balloons=[document.getElementById('balloon1'),document.getElementById('balloon2'),document.getElementById('balloon3')];
+    const song=document.getElementById('hbdSong');
+    const clickSound=document.getElementById('clickSound');
+    const quoteEl=document.getElementById('quote');
+    const ctx=confettiCanvas.getContext('2d');
+    confettiCanvas.width=window.innerWidth; confettiCanvas.height=window.innerHeight;
+
+    const quotes=[
       "Wishing you a day filled with love, laughter, and cake!",
       "May your birthday be the start of a year full of happiness!",
       "Cheers to 17 years of awesomeness! Keep shining.",
       "Birthdays are nature’s way of telling us to eat more cake!",
       "Your vibe is unmatched, have an epic birthday Rakhim!",
       "Another year older, wiser, and cooler. Happy Birthday!",
-      "Make today as special as you are. Happy 17th!"
+      "Make today as special as you are. Happy 17th!",
+      "Keep smiling, keep shining — Happy Birthday!",
+      "Seventeen looks good on you, enjoy every moment!",
+      "May your dreams take flight this year. Happy Birthday!",
+      "Stay amazing, stay fearless, stay Rakhim. Happy Birthday!"
     ];
 
-    function getRandomQuote() {
-      return quotes[Math.floor(Math.random() * quotes.length)];
-    }
+    function randomQuote(){return quotes[Math.floor(Math.random()*quotes.length)];}
 
-    // Confetti setup
-    const confetti = [];
-    for (let i = 0; i < 150; i++) {
-      confetti.push({x: Math.random() * confettiCanvas.width, y: Math.random() * confettiCanvas.height, r: Math.random() * 4 + 1, d: Math.random() * 5 + 1, color: `hsl(${Math.random() * 360}, 100%, 50%)`});
-    }
-    function drawConfetti() {
-      ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
-      for (const c of confetti) {
-        ctx.beginPath();
-        ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2, false);
-        ctx.fillStyle = c.color;
-        ctx.fill();
-      }
-      updateConfetti();
-    }
-    function updateConfetti() {
-      for (const c of confetti) {
-        c.y += c.d;
-        if (c.y > confettiCanvas.height) {
-          c.y = -10;
-          c.x = Math.random() * confettiCanvas.width;
-        }
-      }
-    }
-    window.addEventListener('resize', () => {
-      confettiCanvas.width = window.innerWidth;
-      confettiCanvas.height = window.innerHeight;
-    });
-
-    gift.addEventListener('click', () => {
+    gift.addEventListener('click',()=>{
       clickSound.play();
       giftIcon.classList.add('pop');
-      setTimeout(() => {
+      setTimeout(()=>{
         gift.classList.add('hidden');
         message.classList.remove('hidden');
-        confettiCanvas.classList.remove('hidden');
-        balloons.forEach(b => b.classList.remove('hidden'));
-        quoteEl.textContent = getRandomQuote();
+        balloons.forEach(b=>b.classList.remove('hidden'));
+        quoteEl.textContent=randomQuote();
+        startConfetti();
         song.play();
-        setInterval(drawConfetti, 20);
-      }, 700);
+      },700);
+    });
+
+    const confetti=[];
+    for(let i=0;i<150;i++){
+      confetti.push({x:Math.random()*confettiCanvas.width,y:Math.random()*confettiCanvas.height,r:Math.random()*6+4,
+        dx:Math.random()*2-1,dy:Math.random()*2+2,color:`hsl(${Math.random()*360},100%,50%)`});
+    }
+    function startConfetti(){
+      function draw(){
+        ctx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
+        confetti.forEach(p=>{
+          ctx.beginPath();
+          ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+          ctx.fillStyle=p.color;
+          ctx.fill();
+          p.x+=p.dx; p.y+=p.dy;
+          if(p.y>confettiCanvas.height){p.y=0;}
+        });
+        requestAnimationFrame(draw);
+      }
+      confettiCanvas.classList.remove('hidden'); draw();
+    }
+
+    // Starry Background with rainbow sparkle
+    const starCanvas=document.getElementById('stars');
+    const starCtx=starCanvas.getContext('2d');
+    starCanvas.width=window.innerWidth; starCanvas.height=window.innerHeight;
+    const stars=[];
+    for(let i=0;i<80;i++){
+      stars.push({x:Math.random()*starCanvas.width,y:Math.random()*starCanvas.height,r:Math.random()*2+1,
+                  d:Math.random()*0.5+0.2,o:Math.random()*0.5+0.5,hue:Math.random()*360});
+    }
+    function drawStars(){
+      starCtx.clearRect(0,0,starCanvas.width,starCanvas.height);
+      for(let star of stars){
+        starCtx.beginPath();
+        starCtx.arc(star.x,star.y,star.r,0,Math.PI*2);
+        starCtx.fillStyle=`hsla(${star.hue},100%,80%,${star.o})`;
+        starCtx.fill();
+        star.hue+=0.5; // rainbow effect
+        star.o+=Math.random()*0.05-0.025;
+        if(star.o<0.3) star.o=0.3;
+        if(star.o>1) star.o=1;
+        star.y+=star.d;
+        if(star.y>starCanvas.height) star.y=-5;
+      }
+      requestAnimationFrame(drawStars);
+    }
+    drawStars();
+    window.addEventListener('resize',()=>{
+      starCanvas.width=window.innerWidth;
+      starCanvas.height=window.innerHeight;
     });
   </script>
 </body>

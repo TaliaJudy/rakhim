@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Rakhim</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Pacifico', cursive;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(-45deg, #ff6ec4, #7873f5, #4adede, #f8ffae);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
+    }
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+    .gift-container {
+      text-align: center;
+      cursor: pointer;
+      animation: fadeIn 1.5s ease;
+    }
+    .gift {
+      font-size: 6em;
+      animation: bounce 2s infinite;
+    }
+    .open-text {
+      margin-top: 15px;
+      font-size: 1.5em;
+      color: white;
+      animation: fadeInUp 2s ease;
+    }
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+    @keyframes fadeInUp { from {opacity:0;transform:translateY(20px);} to {opacity:1;transform:translateY(0);} }
+    @keyframes bounce {
+      0%, 100% {transform: translateY(0);}
+      50% {transform: translateY(-20px);}
+    }
+    .hidden {
+      display: none;
+    }
+    .message {
+      text-align: center;
+      color: #fff;
+      animation: fadeIn 2s ease;
+    }
+    h1 {
+      font-size: 3em;
+      background: linear-gradient(90deg, gold, #ffdf00, #f5f5f5);
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 20px rgba(255,215,0,0.6);
+      animation: fadeInDown 1.5s ease-out;
+    }
+    .nickname {
+      font-size: 2em;
+      background: linear-gradient(90deg, #ff0057, #ff7c00, #ffe600, #4aff00, #00ffe5, #7000ff);
+      background-size: 400%;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: rainbow 3s linear infinite, fadeInUp 2s ease-out;
+      text-shadow: 0 0 15px rgba(255,255,255,0.3);
+    }
+    .fromclass {
+      font-size: 1.4em;
+      margin-top: 10px;
+      color: #ffe4b5;
+      animation: fadeInUp 2s ease-out;
+    }
+    button {
+      margin-top: 30px;
+      background: #ff4081;
+      border: none;
+      color: white;
+      font-size: 1.2em;
+      padding: 12px 24px;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(255,64,129,0.6);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeInUp 2.5s ease-out;
+    }
+    button:hover {
+      transform: scale(1.1) rotate(2deg);
+      box-shadow: 0 0 30px rgba(255,64,129,1);
+    }
+    @keyframes fadeInDown {from {opacity:0;transform:translateY(-50px);} to {opacity:1;transform:translateY(0);}}
+    @keyframes rainbow {0%{background-position:0%;}100%{background-position:400%;}}
+    canvas, .balloon {position: fixed; top: 0; left: 0; pointer-events: none;}
+    .balloon {width: 60px; height: 80px; position: absolute; border-radius: 50% 50% 50% 50%; animation: float 8s ease-in-out infinite; opacity: 0.8;}
+    @keyframes float {0% {transform: translateY(100vh) rotate(0deg);}50% {transform: translateY(40vh) rotate(5deg);}100% {transform: translateY(-20vh) rotate(-5deg);}}
+  </style>
+</head>
+<body>
+  <!-- Gift screen -->
+  <div id="gift" class="gift-container">
+    <div class="gift">🎁</div>
+    <div class="open-text">Click to open your gift!</div>
+  </div>
+
+  <!-- Hidden message -->
+  <div id="message" class="hidden message">
+    <h1>Happy 17th Birthday Joseph 🎉</h1>
+    <div class="nickname">AKA Rakhim</div>
+    <div class="fromclass">From Form 3 East</div>
+    <button onclick="alert('From Cytra with ❤️')">From Cytra with ❤️</button>
+  </div>
+
+  <!-- Confetti canvas -->
+  <canvas id="confetti" class="hidden"></canvas>
+
+  <!-- Balloons -->
+  <div class="balloon hidden" id="balloon1" style="left:20%; background:#ff4d4d;"></div>
+  <div class="balloon hidden" id="balloon2" style="left:50%; background:#4dff4d; animation-delay:2s;"></div>
+  <div class="balloon hidden" id="balloon3" style="left:70%; background:#4d4dff; animation-delay:4s;"></div>
+
+  <!-- Birthday song -->
+  <audio id="hbdSong">
+    <source src="https://www2.cs.uic.edu/~i101/SoundFiles/HappyBirthdaySong.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const gift = document.getElementById('gift');
+    const message = document.getElementById('message');
+    const confettiCanvas = document.getElementById('confetti');
+    const balloons = [document.getElementById('balloon1'), document.getElementById('balloon2'), document.getElementById('balloon3')];
+    const song = document.getElementById('hbdSong');
+    const ctx = confettiCanvas.getContext('2d');
+    confettiCanvas.width = window.innerWidth;
+    confettiCanvas.height = window.innerHeight;
+
+    // Confetti setup
+    const confetti = [];
+    for (let i = 0; i < 150; i++) {
+      confetti.push({x: Math.random() * confettiCanvas.width, y: Math.random() * confettiCanvas.height, r: Math.random() * 4 + 1, d: Math.random() * 5 + 1, color: `hsl(${Math.random() * 360}, 100%, 50%)`});
+    }
+
+    function drawConfetti() {
+      ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      for (const c of confetti) {
+        ctx.beginPath();
+        ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2, false);
+        ctx.fillStyle = c.color;
+        ctx.fill();
+      }
+      updateConfetti();
+    }
+
+    function updateConfetti() {
+      for (const c of confetti) {
+        c.y += c.d;
+        if (c.y > confettiCanvas.height) {
+          c.y = -10;
+          c.x = Math.random() * confettiCanvas.width;
+        }
+      }
+    }
+
+    window.addEventListener('resize', () => {
+      confettiCanvas.width = window.innerWidth;
+      confettiCanvas.height = window.innerHeight;
+    });
+
+    gift.addEventListener('click', () => {
+      gift.classList.add('hidden');
+      message.classList.remove('hidden');
+      confettiCanvas.classList.remove('hidden');
+      balloons.forEach(b => b.classList.remove('hidden'));
+      song.play();
+      setInterval(drawConfetti, 20);
+    });
+  </script>
+</body>
+</html>
